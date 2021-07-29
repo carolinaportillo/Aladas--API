@@ -25,7 +25,7 @@ public class Usuario {
     private Date fechaLogin;
 
     @Column(name = "tipo_usuario_id")
-    private Integer tipoUsuarioId;
+    private Integer tipoUsuario;
 
 
     @OneToOne
@@ -77,12 +77,12 @@ public class Usuario {
         this.fechaLogin = fechaLogin;
     }
 
-    public TipoUsuarioEnum getTipoUsuarioId() {
-        return TipoUsuarioEnum.parse(tipoUsuarioId);
+    public TipoUsuarioEnum getTipoUsuario() {
+        return TipoUsuarioEnum.parse(this.tipoUsuario);
     }
 
-    public void setTipoUsuarioId(TipoUsuarioEnum tipoUsuarioId) {
-        this.tipoUsuarioId = tipoUsuarioId.getValue();
+    public void setTipoUsuario(TipoUsuarioEnum tipoUsuario) {
+        this.tipoUsuario = tipoUsuario.getValue();
     }
 
     public Staff getStaff() {

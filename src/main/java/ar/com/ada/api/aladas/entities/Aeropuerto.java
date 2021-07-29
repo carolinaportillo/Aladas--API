@@ -14,7 +14,7 @@ public class Aeropuerto {
     private String nombre;
 
     @Column(name = "codigo_iata")
-    private String codigoIata;
+    private String codigoIATA;
 
     public Integer getAeropuertoId() {
         return aeropuertoId;
@@ -32,12 +32,12 @@ public class Aeropuerto {
         this.nombre = nombre;
     }
 
-    public String getCodigoIata() {
-        return codigoIata;
+    public String getCodigoIATA() {
+        return codigoIATA;
     }
 
-    public void setCodigoIata(String codigoIata) {
-        this.codigoIata = codigoIata;
+    public void setCodigoIATA(String codigoIATA) {
+        this.codigoIATA = codigoIATA;
     }
 
     
