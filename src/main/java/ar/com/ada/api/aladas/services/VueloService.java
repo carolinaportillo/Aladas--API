@@ -52,11 +52,13 @@ public class VueloService {
 
             return false;
         }
-        if(vuelo.getPrecio().doubleValue()< 0){
+        if(vuelo.getPrecio().doubleValue()> 0){
 
             return true;
         }
         return false;
 
     }
+
+    
 }

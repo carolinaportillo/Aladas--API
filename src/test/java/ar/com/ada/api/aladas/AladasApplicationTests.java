@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import ar.com.ada.api.aladas.entities.Aeropuerto;
 import ar.com.ada.api.aladas.entities.Vuelo;
 import ar.com.ada.api.aladas.services.AeropuertoService;
 import ar.com.ada.api.aladas.services.VueloService;
@@ -41,5 +42,36 @@ class AladasApplicationTests{
 
 		assertTrue(vueloService.validarPrecio(vueloConPrecioOk));
 
+	}
+
+
+	@Test
+	void aeropuertoValidarCodigoIATAOk(){
+
+		String codigoIATAOk1 = "EZE";
+		String codigoIATAOk2 = "AEP";
+		String codigoIATAOk3 = "NQN";
+		String codigoIATAOk4 = "N  ";
+		String codigoIATAOk5 = "N39";
+
+		Aeropuerto aeropuerto1 = new Aeropuerto();
+		aeropuerto1.setCodigoIATA(codigoIATAOk1);
+
+		Aeropuerto aeropuerto2 = new Aeropuerto();
+		aeropuerto2.setCodigoIATA(codigoIATAOk2);
+
+		Aeropuerto aeropuerto3= new Aeropuerto();
+		aeropuerto3.setCodigoIATA(codigoIATAOk3);
+
+		
+		Aeropuerto aeropuerto4= new Aeropuerto();
+		aeropuerto4.setCodigoIATA(codigoIATAOk4);
+
+		assertTrue(aeropuertoService.validarCodigoIATA(aeropuerto1));
+		assertTrue(aeropuertoService.validarCodigoIATA(aeropuerto2));
+		assertTrue(aeropuertoService.validarCodigoIATA(aeropuerto3));
+
+
+		assertFalse(aeropuertoService.validarCodigoIATA(aeropuerto4));
 	}
 }
