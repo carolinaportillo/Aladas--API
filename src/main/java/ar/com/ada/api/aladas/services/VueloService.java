@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
 import ar.com.ada.api.aladas.entities.Vuelo;
+import ar.com.ada.api.aladas.entities.Vuelo.EstadoVueloEnum;
 import ar.com.ada.api.aladas.repos.VueloRepository;
 
 @Service
@@ -20,6 +21,8 @@ public class VueloService {
     private AeropuertoService aeropService;
 
     public void crear(Vuelo vuelo){
+
+        vuelo.setEstadoVueloId(EstadoVueloEnum.GENERADO);
         repo.save(vuelo);
     }
 
@@ -60,5 +63,37 @@ public class VueloService {
 
     }
 
+
+    public ValidacionVueloDataEnum validar(Vuelo vuelo){
+
+        if(!validarPrecio(vuelo)){
+
+            return ValidacionVueloDataEnum.ERROR_PRECIO;
+        }
+        if(!validarAeropuertoOrigenDiffDestino(vuelo)){
+
+            return ValidacionVueloDataEnum.ERROR_AEROPUERTOS_IGUALES;
+        }
+
+        return ValidacionVueloDataEnum.OK;
+
+    }
+
+
+    public boolean validarAeropuertoOrigenDiffDestino(Vuelo vuelo){
+
+        /* if(vuelo.getAeropuertoDestino() != vuelo.getAeropuertoOrigen()return true;
+        else return false*/
+        
+        return vuelo.getAeropuertoDestino() != vuelo.getAeropuertoOrigen(); //linea de codigo que resume el if anterior :)
+    }
+
     
+
+
+
+    public enum ValidacionVueloDataEnum {
+        OK, ERROR_PRECIO, ERROR_AEROPUERTO_ORIGEN, ERROR_AEROPUERTO_DESTINO, ERROR_FECHA, ERROR_MONEDA,
+        ERROR_CAPACIDAD_MINIMA, ERROR_CAPACIDAD_MAXIMA, ERROR_AEROPUERTOS_IGUALES, ERROR_GENERAL,
+    }
 }
