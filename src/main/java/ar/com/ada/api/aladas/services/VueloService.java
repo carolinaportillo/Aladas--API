@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
@@ -47,7 +48,29 @@ public class VueloService {
         
         return vuelo;
     }
+
     
+    //busca un vuelo por id y lo retorna una vez encontrado
+    public Vuelo buscarPorId(Integer id) {
+
+        return repo.findByVueloId(id); //se implementa el metodo findByVueloId creado en la interface VueloRepository para saltar el codigo del optional
+    }
+
+
+    public void actualizar(Vuelo vuelo){
+
+        repo.save(vuelo);
+    }
+
+    
+    public List<Vuelo> obtenerVuelosAbiertos(){
+
+        return repo.findByEstadoVueloId(EstadoVueloEnum.ABIERTO.getValue());
+    }
+
+
+
+
 
     public boolean validarPrecio(Vuelo vuelo){
 
@@ -96,4 +119,7 @@ public class VueloService {
         OK, ERROR_PRECIO, ERROR_AEROPUERTO_ORIGEN, ERROR_AEROPUERTO_DESTINO, ERROR_FECHA, ERROR_MONEDA,
         ERROR_CAPACIDAD_MINIMA, ERROR_CAPACIDAD_MAXIMA, ERROR_AEROPUERTOS_IGUALES, ERROR_GENERAL,
     }
+
+
+
 }
