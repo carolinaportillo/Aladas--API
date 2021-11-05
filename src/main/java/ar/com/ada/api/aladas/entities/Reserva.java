@@ -1,6 +1,9 @@
 package ar.com.ada.api.aladas.entities;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.*;
 
 @Entity
@@ -13,15 +16,18 @@ public class Reserva {
     private Integer reservaId;
 
     @ManyToOne
+    @JsonIgnore//para no tener anidado al buscar vuelos BIEN
     @JoinColumn(name = "vuelo_id", referencedColumnName = "vuelo_id")
     private Vuelo vuelo;
 
     @ManyToOne
+    @JsonIgnore//sino me va a imprimir todo lo que lleva pasajero y adentro tiene una lista reservas
     @JoinColumn(name = "pasajero_id", referencedColumnName = "pasajero_id")
     private Pasajero pasajero;
 
     //se establece la relacion entre ambos objetos (reserva y pasaje)
     //nombre del atributo que hace ref a la tabla
+    @JsonIgnore
     @OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Pasaje pasaje;
     
@@ -65,8 +71,8 @@ public class Reserva {
 
     public void setPasaje(Pasaje pasaje) {
         this.pasaje = pasaje;
-        //pasaje.setReserva(this); con esta linea se puede establecer la RB del oneToOne
-    }                              //entre reserva y pasaje a traves del setter.
+        pasaje.setReserva(this); //con esta linea se puede establecer la RB del oneToOne
+    }                               //entre reserva y pasaje a traves del setter.
 
     public EstadoReservaEnum getEstadoReservaId() {
         return EstadoReservaEnum.parse(estadoReservaId);

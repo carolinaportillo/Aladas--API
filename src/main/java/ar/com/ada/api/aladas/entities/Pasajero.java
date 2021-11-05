@@ -49,7 +49,7 @@ public class Pasajero extends Persona {
     //RB con reserva
     public void agregarReserva(Reserva reserva){
         this.reservas.add(reserva);
-        reserva.setPasajero(this);
+        reserva.setPasajero(this); //en algun momento tengo que llamar a este metodo sino no se establecera la RB
     }
 
     

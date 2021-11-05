@@ -17,15 +17,25 @@ public class AeropuertoController {
     @PostMapping("/api/aeropuertos")
     public ResponseEntity<GenericResponse> crear(@RequestBody Aeropuerto aeropuerto){
 
-        GenericResponse respuesta = new GenericResponse();
+        GenericResponse respuesta= new GenericResponse();
 
-        service.crear(aeropuerto.getAeropuertoId(), aeropuerto.getNombre(), aeropuerto.getCodigoIATA());
+        if(!(service.existeAeropuertoId(aeropuerto.getAeropuertoId()))){
 
-        respuesta.isOk = true;
-        respuesta.message = "Se creo correctamente";
-        respuesta.id = aeropuerto.getAeropuertoId();
+            service.crear(aeropuerto.getAeropuertoId(), aeropuerto.getNombre(), aeropuerto.getCodigoIATA());
 
-        return ResponseEntity.ok(respuesta);
+            respuesta.isOk= true;
+            respuesta.message="Aeropuerto creado correctamente";
+
+            return ResponseEntity.ok(respuesta);
+        }
+        else{
+            respuesta.isOk=false;
+            respuesta.message="El id que quiere crear ya existe";
+
+            return ResponseEntity.badRequest().body(respuesta);
+
+        }
     }
-    
+
+
 }

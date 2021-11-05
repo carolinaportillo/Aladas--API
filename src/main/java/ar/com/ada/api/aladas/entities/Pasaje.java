@@ -36,6 +36,7 @@ public class Pasaje {
 
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
+       //reserva.setPasaje(this);relacion bidireccional 
     }
 
     public Date getFechaEmision() {

@@ -51,7 +51,7 @@ public class VueloService {
 
     
     //busca un vuelo por id y lo retorna una vez encontrado
-    public Vuelo buscarPorId(Integer id) {
+    public Vuelo buscarVueloPorId(Integer id) {
 
         return repo.findByVueloId(id); //se implementa el metodo findByVueloId creado en la interface VueloRepository para saltar el codigo del optional
     }
@@ -89,17 +89,31 @@ public class VueloService {
 
     public ValidacionVueloDataEnum validar(Vuelo vuelo){
 
-        if(!validarPrecio(vuelo)){
-
+        if(!validarPrecio(vuelo))//si se cumple hay un error en el precio
             return ValidacionVueloDataEnum.ERROR_PRECIO;
-        }
-        if(!validarAeropuertoOrigenDiffDestino(vuelo)){
 
+        if(!validarAeropuertoOrigenDiffDestino(vuelo))
             return ValidacionVueloDataEnum.ERROR_AEROPUERTOS_IGUALES;
-        }
 
+        if(!validarAeropuertoOrigen(vuelo))//si NO existe
+            return ValidacionVueloDataEnum.ERROR_AEROPUERTO_ORIGEN;
+
+        if(!validarAeropuertoDestino(vuelo))
+            return ValidacionVueloDataEnum.ERROR_AEROPUERTO_DESTINO;
+
+        
         return ValidacionVueloDataEnum.OK;
+    }
 
+
+    public boolean validarAeropuertoOrigen(Vuelo vuelo){
+        return aeropService.existeAeropuertoId(vuelo.getAeropuertoOrigen());
+    }
+
+
+
+    public boolean validarAeropuertoDestino(Vuelo vuelo){
+        return aeropService.existeAeropuertoId(vuelo.getAeropuertoDestino());
     }
 
 

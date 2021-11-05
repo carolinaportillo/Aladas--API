@@ -56,7 +56,7 @@ public class VueloController {
 
     }
 
-
+    //PUT-> cambia el estado de un vuelo que puede pasar de creado a "abierto" para incializar las reservas y/o venta de pasajes
     @PutMapping("/api/vuelos/{id}/estados")
     public ResponseEntity<GenericResponse> putActualizarEstadoVuelo(@PathVariable Integer id, @RequestBody EstadoVueloRequest estadoVuelo){
         
@@ -64,7 +64,7 @@ public class VueloController {
         respuesta.isOk = true;
         respuesta.message = "Estado de vuelo actualizado correctamente";
 
-        Vuelo vuelo = service.buscarPorId(id);
+        Vuelo vuelo = service.buscarVueloPorId(id);
         vuelo.setEstadoVueloId(estadoVuelo.estado);
         service.actualizar(vuelo);
         

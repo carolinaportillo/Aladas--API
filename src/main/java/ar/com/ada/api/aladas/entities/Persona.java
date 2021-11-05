@@ -12,7 +12,7 @@ public class Persona {
 
     private String nombre;
     
-    @Column(name = "tipo_documento_id")
+    @Column(name = "tipo_documento_id")// es un enu, lo debo cambiar en el getter y setter
     private Integer tipoDocumentoId;
 
     private String documento;
@@ -33,11 +33,11 @@ public class Persona {
     }
 
     public TipoDocuEnum getTipoDocumentoId() {
-        return TipoDocuEnum.parse(this.tipoDocumentoId);
+        return TipoDocuEnum.parse(this.tipoDocumentoId);//debe devolver un enum, uso parse ()
     }
 
     public void setTipoDocumentoId(TipoDocuEnum tipoDocumentoId) {
-        this.tipoDocumentoId = tipoDocumentoId.getValue();
+        this.tipoDocumentoId = tipoDocumentoId.getValue();//debe ser un entero, los transformo con getValue()
     }
 
     public String getDocumento() {
@@ -57,7 +57,7 @@ public class Persona {
     }
 
     public PaisEnum getPaisId() {
-        return PaisEnum.parse(this.paisId);
+        return PaisEnum.parse(this.paisId);//con el metodo parse se esta transformando a enum
     }
 
     public void setPaisId(PaisEnum paisId) {
