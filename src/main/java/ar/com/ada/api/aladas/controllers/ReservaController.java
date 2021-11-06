@@ -24,7 +24,7 @@ public class ReservaController {
     @Autowired
     UsuarioService usuarioService;
 
-    @PostMapping("/api/reservas")
+    /*@PostMapping("/api/reservas")
     public ResponseEntity<ReservaResponse> generarReserva(@RequestBody InfoReservaNueva infoReserva){
         ReservaResponse respuesta = new ReservaResponse();
 
@@ -44,11 +44,11 @@ public class ReservaController {
         respuesta.message="Reserva creada con éxito";
 
         return ResponseEntity.ok(respuesta);
-    }
+    }*/
 
    
 
-    @PutMapping("api/reservas/{id}/estados")
+   /* @PutMapping("api/reservas/{id}/estados")
     public ResponseEntity<GenericResponse> eliminarReserva(@PathVariable Integer id, 
     @RequestBody EstadoReservaRequest estadoReserva){
 
@@ -62,5 +62,5 @@ public class ReservaController {
         respuesta.message="Estado reserva actualizado correctamente";
 
         return ResponseEntity.ok(respuesta);
-    }
+    }*/
 }
